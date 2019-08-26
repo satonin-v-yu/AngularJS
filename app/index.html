@@ -56,6 +56,20 @@ var model = {
 };
 var purchaseApp = angular.module("purchaseApp", []);
     purchaseApp.controller("purchaseController", function ($scope) {
+/* View bind by add atribyte "ng-.."
+angular.module("purchaseApp", []) - Для создания модуля
+angular.module("purchaseApp") - Для GET модуля
+Module module
+	.
+	config(callback): регистрирует функцию callback, которая используется для его конфигурации в процессе загрузки
+	constant(key, value): определяет сервис, который возвращает константное значение value
+	controller(name, constructor): создает контроллер
+	directive(name, factory): создает директиву, которая расширяет стандартную разметку html
+	factory(name, provider): создает службу
+	filter(name, factory): создает фильтр
+	provider(name, type): создает сервис
+	service(name, constructor): создает сервис
+*/
     $scope.list = model;
     $scope.addItem = function (text, price) {
         price = parseFloat(price); // преобразуем введенное значение к числу
