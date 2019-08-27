@@ -2,18 +2,38 @@
 <html ng-app="myApp">
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="css/mystyles.css" />
+<style>
+.odd { background-color: #fafafa;}
+.even { background-color: silver}
+</style>
 </head>
 <body>
- 
+
+<!-- Встроенные переменные
+При обходе массивов мы можем использовать ряд встроенных переменных AngularJS:
+$index: возвращает индекс элемента в массиве
+$first: возвращает true, если элемент является первым в массиве
+$last: возвращает true, если элемент является последним в массиве
+$middle: возвращает true, если элемент не является ни первым, ни последним в массиве
+$even: возвращает true, если элемент является четным
+$odd: возвращает true, если элемент является нечетным
+-->
+
 <div ng-controller="phoneController">
-<ul>
-<li ng-repeat="phone in phones">
-<b>{{phone.name}}</b>
-<p>Цена: {{phone.price}} $</p>
-<p>Производитель: {{phone.company.name}}</p>
-</li>
-</ul>
+<table class="table">
+<thead>
+<tr>
+<th>Id</th>
+<th>Модель</th>
+<th>Цена</th>
+</tr>
+</thead>
+<tr ng-repeat="phone in phones" ng-class="$odd ? 'odd' : 'even'">
+	<td>{{$index + 1}}</td>
+	<td>{{phone.name}}</td>
+	<td>{{phone.price}}</td>
+</tr>
+</table>
 </div>
 
 <script src="js/lib/angular.min.js"></script>
