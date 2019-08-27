@@ -13,7 +13,14 @@ autoscroll: определяет, допускается ли прокрутка
 -->
 
 <div ng-controller="phoneController">
-    <ng-include src="'phonesList.html'"></ng-include>
+    <div ng-repeat="button in modes">
+        <label>
+            <input type="radio" ng-model="data.mode"
+			value="{{button.value}}" name="modes" />
+            {{button.label}}
+        </label>
+    </div>
+    <div ng-include="setFile()"></div>
 </div>
 
 <script src="js/lib/angular.min.js"></script>
