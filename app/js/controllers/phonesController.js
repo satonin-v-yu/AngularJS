@@ -1,6 +1,6 @@
 var myApp=angular.module('myApp', []);
 myApp.controller('phoneController', function($scope) {
-  
+   
   $scope.phones = [{
         name: 'Nokia Lumia 630',
         year: 2014,
@@ -25,5 +25,5 @@ myApp.controller('phoneController', function($scope) {
             name: 'Xiaomi',
             country: 'Китай'
         }
-    }]
+    }];
 });

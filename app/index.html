@@ -2,73 +2,23 @@
 <html ng-app="myApp">
 <head>
 <meta charset="utf-8">
-<style>
-.odd { background-color: #fafafa;}
-.even { background-color: silver}
-</style>
+<link rel="stylesheet" href="css/mystyles.css" />
 </head>
 <body>
 
-<!-- Привязка данных раскрывается через ряд директив:-->
-
-<!-- ng-bind: осуществляет привязку к свойству innerText html-элемента
+<!-- Директива ng-include может принимать три параметра:
+src: url загружаемого файла (Нам надо обращаться к нему через веб-сервер)
+onload: определяет выражение, которое рендерится при загрузке файла
+autoscroll: определяет, допускается ли прокрутка во время загрузки файла
 -->
-ONLY READ
+
 <div ng-controller="phoneController">
-    <p>Количество элементов: 
-	<span ng-bind="phones.length"></span></p>
-    <p>Первый элемент: 
-	<span ng-bind="phones[0].name"></span></p>
+    <ng-include src="'phonesList.html'"></ng-include>
 </div>
-
-<!-- 
-ng-model: создает двустороннюю привязку
--->
-READ AND WRITE
-<div ng-controller="phoneController">
-    <input type="text" ng-model="phones[0].name" / >
-    <p ng-bind="phones[0].name"></p>
-</div>
-
-<!-- 
-ng-bind-template: аналогична ng-bind за тем исключением,
-	что позволяет установить привязку сразу к нескольким выражениям
--->
-READ AND WRITE SEVERAL DATA
-<div ng-controller="phoneController">
-<p ng-bind-template="{{phones[0].name}}: {{phones[0].price}} $"></p>
-</div>
-
-<!-- 
-ng-non-bindable: определяет участок html-кода,
-	в котором привязка не будет использоваться
--->
-<br>
-ng-non-bindable	
-<p>{{1 + 2}}</p>
-<p ng-non-bindable>{{1 + 2}}</p>
-
-<!-- 
-ng-bind-html: осуществляет привязку к свойству innerHTML html-элемента
-	Чтобы осуществить привязку к коду html, надо подключить angular-sanitize.js
--->
-<div ng-controller="helloController">
-<p><textarea ng-model="htmlcode"></textarea></p>
-<p ng-bind-html="htmlcode"></p>
-</div>
-
 
 <script src="js/lib/angular.min.js"></script>
-<script src="js/lib/angular-sanitize.min.js"></script>
 <script type="text/javascript">
-//angular.module('myApp', []);
-
-var myApp0 = angular.module('myApp', ["ngSanitize"]);
-myApp0.controller('helloController', function($scope) {
- 
-    $scope.htmlcode="Директива <b>ng-bind-html</b>";
-	//$scope.$apply()
-});
+var myApp = angular.module('myApp', []);
 </script>
 <script src="js/controllers/phonesController.js"></script>
 </body>
