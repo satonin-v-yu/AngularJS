@@ -1,3 +1,12 @@
+<!-- Для навигации по html-странице мы можем применять ряд методов:
+children(): возвращает набор дочерних элементов
+eq(index): возвращает элемент по определенному индексу из коллекции элементов
+find(tag): получает все элементы по определенному тегу
+next(): возвращает следующий сестринский элемент
+parent(): возвращает родительский элемент
+html(): возвращает html-код элемента
+text(): возвращает текстовое содержимое элемента
+-->
 <!doctype html>
 <html ng-app="questApp">
 <head>
@@ -44,5 +53,18 @@
 <script src="js/controllers/QuestionController.js"></script>
 <script src="js/controllers/AnswerController.js"></script>
 <script src="js/filter.js"></script>
+
+<script type="text/javascript">
+// получаем элент body
+var elem = angular.element(document.querySelector("body"));
+// выводим html элемента body
+console.log(elem.html());
+// получаем элемент с классом quest
+var quest = angular.element(document.querySelector(".quest"));
+// получаем дочерний элемент h3
+var questHeader = quest.find('h3');
+// выводим его текст
+console.log(questHeader.text());
+</script>
 </body>
 </html>
