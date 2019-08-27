@@ -2,27 +2,39 @@
 <html ng-app="myApp">
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="css/mystyles.css" />
 </head>
 <body>
-
-<!-- Директива ng-include может принимать три параметра:
-src: url загружаемого файла (Нам надо обращаться к нему через веб-сервер)
-onload: определяет выражение, которое рендерится при загрузке файла
-autoscroll: определяет, допускается ли прокрутка во время загрузки файла
--->
-
 <div ng-controller="phoneController">
     <div ng-repeat="button in modes">
         <label>
-            <input type="radio" ng-model="data.mode"
-			value="{{button.value}}" name="modes" />
+            <input type="radio" ng-model="data.mode" value="{{button.value}}" name="modes" />
             {{button.label}}
         </label>
     </div>
-    <div ng-include="setFile()"></div>
+    <div ng-switch on="data.mode">
+        <div ng-switch-when="Tablets">
+            <ul>
+                <li ng-repeat="tablet in tablets">
+                <b>{{tablet.name}}</b>
+                <p>Цена: {{tablet.price}} $</p>
+                <p>Производитель: {{tablet.company}}</p>
+                </li>
+            </ul>
+        </div>
+        <div ng-switch-when="Phones">
+            <ul>
+                <li ng-repeat="phone in phones">
+                <b>{{phone.name}}</b>
+                <p>Цена: {{phone.price}} $</p>
+                <p>Производитель: {{phone.company}}</p>
+                </li>
+            </ul>
+        </div>
+        <div ng-switch-default>
+            Выберите товары для просмотра
+        </div>
+    </div>
 </div>
-
 <script src="js/lib/angular.min.js"></script>
 <script type="text/javascript">
 var myApp = angular.module('myApp', []);
