@@ -1,26 +1,20 @@
 <!doctype html>
-<html ng-app="myApp">
+<html ng-app="questApp">
 <head>
-<meta charset="utf-8">
-<link rel="stylesheet" href="css/mystyles.css" />
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/mystyles.css" />
 </head>
 <body>
-<div ng-controller="helloController">
-    <textarea ng-model="htmlcode"></textarea>
-    <p ng-bind-html="htmlcode"></p>
-</div>
- 
+
+<nav><a href="#/question">Вопрос</a> | <a href="#/answer">Ответить</a></nav>
+<ng-view></ng-view>
+<br>
+<p>@OOO "MyCompany"</p>
 <script src="js/lib/angular.min.js"></script>
-<script src="js/lib/angular-sanitize.min.js"></script>
-<script>
-var myApp = angular.module('myApp', ["ngSanitize"]);
-myApp.controller('helloController', function($scope, $sanitize) {
- 
-    $scope.htmlcode="<div>Жми <b>тут</b></div>";
-    $scope.$watch("htmlcode", function (newValue) {
-        $scope.htmlcode = $sanitize(newValue);
-    });
-});
-</script>
+<script src="js/lib/angular-route.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/dataService.js"></script>
+<script src="js/controllers/QuestionController.js"></script>
+<script src="js/controllers/AnswerController.js"></script>
 </body>
 </html>
