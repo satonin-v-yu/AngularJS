@@ -30,10 +30,17 @@ withCredentials: если параметр равен true, то в запрос
 xsrfHeaderNamexsrfCookieName: используется для отправки CSRF-токенов
  */
 questApp.controller('QuestionController', 
-    function QuestionController($scope, dataService){
-     
-        var promiseObj=dataService.getData();
-        promiseObj.then(function(value) { $scope.question=value; }); //1=sucsesCalback
+    function QuestionController($scope, dataService, $timeout){
+      
+     var promiseObj = $timeout(function(){
+            return dataService.getData();
+        }, 3000);
+        /*
+        На выходе у нас получается объект promiseObj, который мы затем можем использовать.
+        Например, если нам надо остановить выполнение сервиса $timeout,
+        то мы можем вызвать следующий метод: $timeout.cancel(promiseObj)
+        */
+       promiseObj.then(function(value) { $scope.question=value; });
          
         $scope.voteUp = function (answer){
             answer.rate++;
