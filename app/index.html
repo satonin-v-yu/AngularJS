@@ -1,13 +1,3 @@
-<!-- Параметры директив
-Свойство link позволяет задать функцию директивы.
-
-А свойство restrict позволяет указать объект,
-	к которому директива будет применяться.
-E: директива применяется к элементу// <answer-list source="question" />
-A: директива применяется к атрибуту//
-C: директива применяется к классу//<div class="answer-list: question"></div>
-M: директива применяется к комментарию <!-- directive: answer-list question -->
-
 <!doctype html>
 <html ng-app="questApp">
 <head>
@@ -20,49 +10,23 @@ M: директива применяется к комментарию <!-- dire
 <h3>{{question.text}}</h3>
 <p>{{question.author}} </p> <p><i>{{question.date}}</i></p>
 </div>
-<div answer-list></div>
 <h3>Ответы</h3>
+<div class="answers">
+<div ng-repeat="answer in question.answers | orderBy:sortparam" class="answer">
+<div class="vote">
+    <a class="vote-up" ng-click="voteUp(answer)"></a>
+    <span class="rate">{{answer.rate}}</span>
+    <a class="vote-down" ng-click="voteDown(answer)"></a>
 </div>
-
-<div ng-controller="AnswerController">
-<form name="answerForm">
-<fieldset>
-<p><label for="answerText">Текст ответа</label>
-<input id="answerText" ng-model="answer.text" required placeholder="Введите ответ" /></p>
-<p><label for="answerAuthor">Автор ответа</label>
-<input id="answerAuthor" ng-model="answer.author" required placeholder="Введите автора" /></p>
-<p><label for="answerDate">Дата ответа(format 31/12/1999)</label>
-<input id="answerDate" ng-model="answer.date" required  ng-pattern="/\d\d/\d\d/\d\d\d\d/" placeholder="Введите дату" /></p>
-</fieldset>
-<button type="submit" ng-click="save(answer, answerForm)">Сохранить</button>
-</form>
+<b>{{answer.text}}</b>
+<p>{{answer.author}}</p>
+<p><i>{{answer.date}}</i></p>
 </div>
-
+</div>
+</div>
 <script src="js/lib/angular.min.js"></script>
 <script src="js/app.js"></script>
+<script src="js/questionService.js"></script>
 <script src="js/controllers/QuestionController.js"></script>
-<script src="js/answerList.js"></script>
-<script src="js/controllers/AnswerController.js"></script>
-<script src="js/filter.js"></script>
-
-<script type="text/javascript">
-var quest = angular.element(document.querySelector(".quest"));
-var questHeader = quest.find('h3');
-// удалим заголовок
-questHeader.remove();
-// создадим новый элемент div
-var newDiv = angular.element("<div>");
-// установим у него стили
-newDiv.css("width", "80px");
-newDiv.css("height", "50px");
-newDiv.css("background-color","blue");
-// добавим в div.quest
-quest.append(newDiv);
-
-newDiv.on("click", function (e){
-    var w = parseInt(newDiv.css("width")) + 10;
-    newDiv.css("width", w+"px");
-});
-</script>
 </body>
 </html>
