@@ -1,10 +1,3 @@
-<!-- DOM API и которые позволяют работать со структурой веб-страницы:
-$anchorScroll: перемещает полосу прокрутки к определенной ссылке на странице
-$document: предоставляет объект jqLite, который содержит стандартный объект window.document
-$interval: представляет обертку вокруг функции window.setInterval
-$location: предоставляет доступ к URL
-$window: предоставляет стандартный javascript-объект window
--->
 <!doctype html>
 <html ng-app="myApp">
 <head>
@@ -12,44 +5,22 @@ $window: предоставляет стандартный javascript-объек
 <link rel="stylesheet" href="css/mystyles.css" />
 </head>
 <body>
-<div ng-controller="DomController">
-	<button ng-click="getAlert('Hell to World')">Не нажимай</button>
-	<br>
-    <a id="angButton">Жми</a>
+<div ng-controller="helloController">
+    <textarea ng-model="htmlcode"></textarea>
+    <p ng-bind-html="htmlcode"></p>
 </div>
  
-<!-- <div ng-app="anchorScrollExample" id="top">
-		<div ng-controller="ScrollController">
-		  <h1>Top of the page</h1>
-		  <div style="height:2000px"></div>
-		  <button ng-click="gotoTop()">Go to Top!</button>
-		</div>
-</div> -->
 <script src="js/lib/angular.min.js"></script>
+<script src="js/lib/angular-sanitize.min.js"></script>
 <script>
-var myApp = angular.module('myApp', []);
-myApp.controller("DomController", function($scope, $window, $document){
-     
-    $scope.getAlert = function (text){
-            $window.alert(text);
-	};
-	// получаем элемент с классом quest
-	$document
-		.find('a').on("click", function (event) {
-        	$window.alert(event.target.innerText);
+var myApp = angular.module('myApp', ["ngSanitize"]);
+myApp.controller('helloController', function($scope, $sanitize) {
+ 
+    $scope.htmlcode="<div>Жми <b>тут</b></div>";
+    $scope.$watch("htmlcode", function (newValue) {
+        $scope.htmlcode = $sanitize(newValue);
     });
 });
-
-// var app2 = angular.module('anchorScrollExample', []);
-//       app2.controller('ScrollController', ['$scope', '$location', '$anchorScroll',
-//         function ($scope, $location, $anchorScroll) {
-//           $scope.gotoTop = function () {
-//             //set the anchor point using an id
-//             $location.hash('top');
-//             //scroll to the new anchor point
-//             $anchorScroll();
-//           };
-//         }]);
 </script>
 </body>
 </html>
