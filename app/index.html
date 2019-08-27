@@ -20,20 +20,15 @@ $odd: возвращает true, если элемент является неч
 -->
 
 <div ng-controller="phoneController">
-<table class="table">
-<thead>
-<tr>
-<th>Id</th>
-<th>Модель</th>
-<th>Цена</th>
-</tr>
-</thead>
-<tr ng-repeat="phone in phones" ng-class="$odd ? 'odd' : 'even'">
-	<td>{{$index + 1}}</td>
-	<td>{{phone.name}}</td>
-	<td>{{phone.price}}</td>
-</tr>
-</table>
+    <ul>
+        <li ng-repeat="company in phones">
+            <p>{{company.name}}</p>
+            <ul ng-repeat="model in company.models">
+                <b>{{model.name}}</b>
+                <p>Цена: {{model.price}} $</p>
+            </ul>
+        </li>
+    </ul>
 </div>
 
 <script src="js/lib/angular.min.js"></script>
