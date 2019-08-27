@@ -2,24 +2,24 @@
 <html ng-app="myApp">
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="css/mystyles.css" />
 </head>
 <body>
-    <h2>{{ message }}</h2>
-    <div ng-controller="myController">
-        <h3>{{ message }}</h3>
-    </div>
-    <h4>{{ message }}</h4>
-	
+ 
+<div ng-controller="phoneController">
+<ul>
+<li ng-repeat="phone in phones">
+<b>{{phone.name}}</b>
+<p>Цена: {{phone.price}} $</p>
+<p>Производитель: {{phone.company.name}}</p>
+</li>
+</ul>
+</div>
+
 <script src="js/lib/angular.min.js"></script>
 <script type="text/javascript">
-var myApp = angular.module('myApp', [])
-    .run(function($rootScope) {
-     
-    $rootScope.message = "Модуль myApp";
-});
-myApp.controller('myController', function($scope) {
-    $scope.message = "Контроллер myController";
-});
+angular.module('myApp', []);
 </script>
+<script src="js/controllers/phonesController.js"></script>
 </body>
 </html>
