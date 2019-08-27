@@ -1,9 +1,10 @@
 var myApp=angular.module('myApp');
 myApp.controller('phoneController', function($scope) {
-	
-	$scope.somestyle={background: '#f0f', color:'#fff'};
-	$scope.someclass="myclass";
-	$scope.visible = false;
+ 
+ 
+2
+$scope.somestyle={background: '#eee', color:'#333'};
+$scope.someclass="myclass";
  
   $scope.phones = [{
         name: 'Nokia Lumia 630',
@@ -21,7 +22,6 @@ myApp.controller('phoneController', function($scope) {
         price: 300,
         company: 'Xiaomi'
     }];
-	//------------------
     $scope.tablets = [{
         name: 'Samsung Galaxy Tab S4',
         year: 2014,
@@ -38,7 +38,6 @@ myApp.controller('phoneController', function($scope) {
         price: 220,
         company: 'Lenovo'
     }];
-	//------------------
   $scope.data = {};
   $scope.setFile = function () {
     if($scope.data.mode=='Tablets')
@@ -46,7 +45,6 @@ myApp.controller('phoneController', function($scope) {
     else if($scope.data.mode=='Phones')
         return 'phonesList.html';
 };
-//------------------
   $scope.modes = [{
       value: 'Tablets',
       label: 'Планшеты'
@@ -54,5 +52,4 @@ myApp.controller('phoneController', function($scope) {
       value: 'Phones',
       label: 'Смартфоны'
   }];
-  //------------------
 });

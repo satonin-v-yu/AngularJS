@@ -1,10 +1,40 @@
+<!-- В особую группу директив можно выделить директивы,
+	которые позволяют стилизовать элементы или управлять ими:
+
+ng-style: устанавливает у элемента стили css
+ng-class: задает элементу определенный класс
+ng-class-even: устанавливает класс для четных элементов
+ng-class-odd: устанавливает класс для нечетных элементов
+ng-hide: скрывает элемент
+ng-show: делает элемент видимым
+ng-if: задает для элемента некоторое условие
+-->
+
 <!doctype html>
 <html ng-app="myApp">
 <head>
 <meta charset="utf-8">
+<style>
+.myclass { background-color: #0f0;}
+</style>
 </head>
 <body>
+
+
 <div ng-controller="phoneController">
+	<div ng-style="somestyle">Директива ng-style</div>
+	<div ng-class="someclass">Директива ng-class</div>
+	
+	<input type="checkbox" ng-model="visible">Открыть/скрыть
+	<p ng-show="visible">Первый блок</p>
+	<p ng-hide="visible">Второй блок</p>
+
+
+	<input type="checkbox" ng-model="data.visible">Открыть/скрыть
+	<p ng-if="data.visible">Первый блок</p>
+	<p ng-if="!data.visible">Второй блок</p>
+
+	
     <div ng-repeat="button in modes">
         <label>
             <input type="radio" ng-model="data.mode" value="{{button.value}}" name="modes" />
