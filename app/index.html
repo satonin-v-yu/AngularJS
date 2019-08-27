@@ -4,15 +4,21 @@
 <meta charset="utf-8">
 </head>
 <body>
-<p>Модуль: {{ moduleName }}</p>
-<p>Сообщение: {{ message }}</p>
-
+    <h2>{{ message }}</h2>
+    <div ng-controller="myController">
+        <h3>{{ message }}</h3>
+    </div>
+    <h4>{{ message }}</h4>
+	
 <script src="js/lib/angular.min.js"></script>
 <script type="text/javascript">
-angular.module('myApp', [])
+var myApp = angular.module('myApp', [])
     .run(function($rootScope) {
-    $rootScope.moduleName = "myApp";
-    $rootScope.message = "Hello AngularJS";
+     
+    $rootScope.message = "Модуль myApp";
+});
+myApp.controller('myController', function($scope) {
+    $scope.message = "Контроллер myController";
 });
 </script>
 </body>
