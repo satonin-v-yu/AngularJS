@@ -4,6 +4,8 @@ questApp.directive("answerList", function () {
             scope.data = scope[attrs["answerList"]];
         },
         restrict: "A",
+		//templateUrl: "templates/answersTemplate.html"
+		
         template: "<div class='answers'>" +
         "<div ng-repeat='answer in data.answers' class='answer'>" +
             "<div class='vote'>" +
@@ -14,6 +16,7 @@ questApp.directive("answerList", function () {
         "<b>{{answer.text}}</b>" +
         "<p>{{answer.author}}</p>" +
         "<p><i>{{answer.date}}</i></p>" +
-    "</div></div>"
+		"</div></div>"
+		
     }
 });
