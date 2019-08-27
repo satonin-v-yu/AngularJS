@@ -1,14 +1,12 @@
-<!-- Манипуляция элементами
-addClass(name): добавляет к элементу класс
-attr(name) / attr(name, value): получает значение value атрибута name элемента и устанавливает его
-css(name) / css(name, value): получает значение value стиля name у элемента и устанавливает его
-hasClass(name): возвращает true, если элемент имеет класс name
-prop(name) / prop(name, value): получает значение value свойстваа name элемента и устанавливает его
-removeAttr(name): удаляет у элемента атрибут
-removeClass(name): удаляет у элемента класс
-text(value): устанавливает текстовое значение у элемента
-toggleClass(name): переключает класс - класс name добавляется, а все ранее имевшиеся классы удаляются
-val() / val(value): получает значение атрибута value и устанавливает его значение
+<!-- Следующие методы позволяют управлять созданием и удалением элементов:
+angular.element(html): создает определенный элемент с кодом html
+after(elements): добавляет элементы elements после элемента, на котором вызывается данный метод
+append(elements): добавляет элементы elements в качестве дочерних в конец элемента, на котором вызывается данный метод
+clone(): создает копию элемента, для которого вызывается метод
+prepend(elements): добавляет элементы elements в качестве дочерних в начало элемента, на котором вызывается данный метод
+remove(): удаляет элемент
+replaceWith(element): заменяет элемент, на котором вызывается метод, другим элементом, который передается в качестве параметра
+wrap(element): обертывает элемент, на котором вызывается метод, новым элементом, передающимся в качестве параметра
 -->
 <!doctype html>
 <html ng-app="questApp">
@@ -60,12 +58,16 @@ val() / val(value): получает значение атрибута value и 
 <script type="text/javascript">
 var quest = angular.element(document.querySelector(".quest"));
 var questHeader = quest.find('h3');
-// изменим текст заголовка
-questHeader.text("Заголовок h3");
-// окрасим заголовок в те цвета, в которые он себя окрасит
-questHeader.css("color", "blue");
-// добвим класс
-questHeader.addClass("header");
+// удалим заголовок
+questHeader.remove();
+// создадим новый элемент div
+var newDiv = angular.element("<div>");
+// установим у него стили
+newDiv.css("width", "80px");
+newDiv.css("height", "50px");
+newDiv.css("background-color","blue");
+// добавим в div.quest
+quest.append(newDiv);
 </script>
 </body>
 </html>
