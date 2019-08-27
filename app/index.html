@@ -16,16 +16,31 @@ ng-mouseleave="changeClass($event)">
 <h3>{{question.text | uppercase}}</h3>
 <p>{{question.author | lowercase}} </p> <p><i>{{question.date}}</i></p>
 </div>
+
     Количество элементов for:
 	{{1405405678756 | date:'yyyy-MM-dd'}}
 	<br>
 	<span ng-bind="question.answers.length  | currency"></span>
 	<br>
 	<span ng-bind="question.answers.length | currency:'RUB'"></span>
-	
-<h3>Ответы</h3>
+	<br>
+	<br>
+//--------------------------------------
+<br>
+тупо ограничивает дату
+<select ng-model="answer.author">
+	<option ng-repeat="answer in question.answers" >{{answer.author}}</option>
+</select>
+<select>
+	<option ng-repeat="selected_answer in question.answers | filter:answer">{{selected_answer.date}}</option>
+</select>
+<br>
+//--------------------------------------
+
+<p>Filter by author: <input type="text" ng-model="member"></p>
+<h3>ALL Ответы</h3>
 <div class="answers">
-<div ng-repeat="answer in question.answers | orderBy:sortparam | limitTo:2" class="answer">
+<div ng-repeat="answer in question.answers | orderBy:sortparam | limitTo:10  | filter:{author:member}" class="answer">
 <div class="vote">
     <a class="vote-up" ng-click="voteUp(answer)"></a>
     <span class="rate">{{answer.rate| number:1.0}}</span>
