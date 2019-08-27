@@ -31,34 +31,31 @@ xsrfHeaderNamexsrfCookieName: используется для отправки C
  */
 questApp.controller('QuestionController',
     function QuestionController($scope, $http){
-      
-        $scope.loaded=false;
-      
-        $scope.load = function (){
-            var conf = {
-                timeout: 600 // 600 миллисекунд
-            };
-            // $http({
-                // method: 'GET',
-                // url: 'question.json'
-            // })
-            $http.get('question.json', conf)
-            .then(function successCallback(response) {
+       
+         $http.get('question.json')
+                .then(function success(response) {
                     $scope.question = response.data.question;
-                    $scope.loaded = true;
-                    console.log("код ответа: " + response.status);
-                    console.log("объем данных: " + response.headers("content-length"));
-                    console.log(response.config);
-                }, function errorCallback(response) {
-                    console.log("Возникла ошибка");
-                    console.log("код ответа: " + response.status);
-                });
-        };
+        });
+          
         $scope.voteUp = function (answer){
-            answer.rate++;
+            $http({
+                method:'GET',
+                url:'setAnswer.php',
+                params: {'id':answer.id, 'up': true}
+            }).then(function success(response) {
+                 answer.rate++;
+                 console.log(response.data);
+            })
         };
         $scope.voteDown = function (answer){
-            answer.rate--;
+            $http({
+                method:'GET',
+                url:'setAnswer.php', 
+                params: {'id':answer.id,'up': false}
+            }).then(function success(response) {
+                 answer.rate--;
+                 console.log(response.data);
+            })
         };
     }
 )
