@@ -1,22 +1,16 @@
-//questApp.service(...)
-questApp.factory('dataService', function(){
+questApp.factory('dataService', function($http, $q){
     return{
-        question:{
-            text: 'Какой js-фреймворк лучше использовать?',
-            author: 'Иван Иванов',
-            date: '20/10/2013',
-            answers: 
-            [{
-                text: 'AngularJS!',
-                author: 'Вова Сидоров',
-                date: '20/10/2013',
-                rate:2
-            },{
-                text: 'AngularJS лучше всех',
-                author: 'Олег Кузнецов',
-                date: '21/10/2013',
-                rate:3
-            }]
+        getData : function(){
+            var deferred = $q.defer();
+            $http({method: 'GET', url: 'question.json'})
+                .then (function success(response) {
+                        deferred.resolve(response.data.question);
+                    },function error(response) {
+                        deferred.reject(response.status);
+                    }
+                );
+             
+            return deferred.promise;
         }
-    };
+    }
 })

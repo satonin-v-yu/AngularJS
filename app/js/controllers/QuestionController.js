@@ -29,33 +29,17 @@ withCredentials: если параметр равен true, то в запрос
     аутентификационные куки
 xsrfHeaderNamexsrfCookieName: используется для отправки CSRF-токенов
  */
-questApp.controller('QuestionController',
-    function QuestionController($scope, $http){
-       
-         $http.get('question.json')
-                .then(function success(response) {
-                    $scope.question = response.data.question;
-        });
-          
+questApp.controller('QuestionController', 
+    function QuestionController($scope, dataService){
+     
+        var promiseObj=dataService.getData();
+        promiseObj.then(function(value) { $scope.question=value; }); //1=sucsesCalback
+         
         $scope.voteUp = function (answer){
-            $http({
-                method:'GET',
-                url:'setAnswer.php',
-                params: {'id':answer.id, 'up': true}
-            }).then(function success(response) {
-                 answer.rate++;
-                 console.log(response.data);
-            })
+            answer.rate++;
         };
         $scope.voteDown = function (answer){
-            $http({
-                method:'GET',
-                url:'setAnswer.php', 
-                params: {'id':answer.id,'up': false}
-            }).then(function success(response) {
-                 answer.rate--;
-                 console.log(response.data);
-            })
+            answer.rate--;
         };
     }
 )
