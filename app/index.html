@@ -1,14 +1,19 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="myApp">
 <head>
 <meta charset="utf-8">
 </head>
 <body>
-<label>Введите имя:</label>
-<input type="text" ng-model="name" placeholder="Введите имя">
- 
-<h1>Добро пожаловать {{name}}!</h1>
-      
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<p>Модуль: {{ moduleName }}</p>
+<p>Сообщение: {{ message }}</p>
+
+<script src="js/lib/angular.min.js"></script>
+<script type="text/javascript">
+angular.module('myApp', [])
+    .run(function($rootScope) {
+    $rootScope.moduleName = "myApp";
+    $rootScope.message = "Hello AngularJS";
+});
+</script>
 </body>
 </html>
