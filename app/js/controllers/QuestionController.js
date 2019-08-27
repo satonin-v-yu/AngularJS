@@ -1,55 +1,38 @@
 var myApp=angular.module('myApp');
-myApp.controller('phoneController', function($scope) {
- 
- 
-2
-$scope.somestyle={background: '#eee', color:'#333'};
-$scope.someclass="myclass";
- 
-  $scope.phones = [{
-        name: 'Nokia Lumia 630',
-        year: 2014,
-        price: 200,
-        company: 'Nokia'
-    },{
-        name: 'Samsung Galaxy S 4',
-        year: 2014,
-        price: 400,
-        company: 'Samsung'
-    },{
-        name: 'Mi 5',
-        year: 2015,
-        price: 300,
-        company: 'Xiaomi'
-    }];
-    $scope.tablets = [{
-        name: 'Samsung Galaxy Tab S4',
-        year: 2014,
-        price: 300,
-        company: 'Samsung'
-    },{
-        name: 'LG G PAD 8.3',
-        year: 2013,
-        price: 180,
-        company: 'LG'
-    },{
-        name: 'IdeaTab A8',
-        year: 2014,
-        price: 220,
-        company: 'Lenovo'
-    }];
-  $scope.data = {};
-  $scope.setFile = function () {
-    if($scope.data.mode=='Tablets')
-        return 'tabletsList.html';
-    else if($scope.data.mode=='Phones')
-        return 'phonesList.html';
-};
-  $scope.modes = [{
-      value: 'Tablets',
-      label: 'Планшеты'
-  },{
-      value: 'Phones',
-      label: 'Смартфоны'
-  }];
+myApp.controller('QuestionController', function($scope) {
+     
+    $scope.question={
+        text: 'Какой js-фреймворк лучше использовать?',
+        author: 'Иван Иванов',
+        date: '20/10/2013',
+        answers: 
+        [{
+            text: 'AngularJS!',
+            author: 'Вова Сидоров',
+            date: '20/10/2013',
+            rate:2
+        },{
+            text: 'AngularJS лучше всех',
+            author: 'Олег Кузнецов',
+            date: '20/10/2013',
+            rate:0
+        },{
+            text: 'Я бы использовал knockout',
+            author: 'Неизвестный',
+            date: '21/10/2013',
+            rate:0
+        }]
+    };
+     
+    $scope.voteUp = function (answer){
+        answer.rate++;
+    };
+    $scope.voteDown = function (answer){
+        answer.rate--;
+    };
+    $scope.questColorClass= "questcolor";
+    $scope.changeClass = function (e) {
+         
+        $scope.questColorClass = e.type == "mouseover" ? "questselectedcolor" : "questcolor";
+    }
 });

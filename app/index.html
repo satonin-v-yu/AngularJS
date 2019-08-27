@@ -1,74 +1,54 @@
-<!-- В особую группу директив можно выделить директивы,
-	которые позволяют стилизовать элементы или управлять ими:
-
-ng-style: устанавливает у элемента стили css
-ng-class: задает элементу определенный класс
-ng-class-even: устанавливает класс для четных элементов
-ng-class-odd: устанавливает класс для нечетных элементов
-ng-hide: скрывает элемент
-ng-show: делает элемент видимым
-ng-if: задает для элемента некоторое условие
+<!--
+Кроме директивы ng-click, предназначенной для обработки кликов по элементам,
+	имеется еще ряд директив:
+ng-blur: определяет поведение для события blur, которое возникает при потере элементом фокуса
+ng-focus: определяет поведение для события focus, которое возникает при получении фокуса элементом
+ng-change: определяет поведение для события change, которое возникает при изменении элементом состояния, например, при нажатии на элемент input type="checkbox"
+ng-submit: определяет поведение для события submit, которое возникает при отправке формы
+ng-copy/ng-cut/ng-paste: определяет поведение для событий копирования, вырезки и вставки соответственно
+ng-dblclick: та же ng-click, только обрабатывается двойное нажатие
+ng-mousedown: для обработки нажатия клавиши мыши
+ng-mouseup: для обработки отжатия мыши
+ng-mouseenter: для обработки наведения курсора в определенную область
+ng-mouseleave: для обработки ухода курсора с определенной области
+ng-mousemove: для обработки перемещения курсора мыши
+ng-keydown: обработка нажатия клавишы клавиатуры
+ng-keypress: обработка нажатия клавишы клавиатуры
+ng-keyup: обработка отжатия клавишы клавиатуры
 -->
 
 <!doctype html>
-<html ng-app="myApp">
+<html ng-app='myApp'>
 <head>
 <meta charset="utf-8">
-<style>
-.myclass { background-color: #0f0;}
-</style>
+<link rel="stylesheet" href="css/mystyles.css" />
 </head>
 <body>
-
-
-<div ng-controller="phoneController">
-	<div ng-style="somestyle">Директива ng-style</div>
-	<div ng-class="someclass">Директива ng-class</div>
-	
-	<input type="checkbox" ng-model="visible">Открыть/скрыть
-	<p ng-show="visible">Первый блок</p>
-	<p ng-hide="visible">Второй блок</p>
-
-
-	<input type="checkbox" ng-model="data.visible">Открыть/скрыть
-	<p ng-if="data.visible">Первый блок</p>
-	<p ng-if="!data.visible">Второй блок</p>
-
-	
-    <div ng-repeat="button in modes">
-        <label>
-            <input type="radio" ng-model="data.mode" value="{{button.value}}" name="modes" />
-            {{button.label}}
-        </label>
-    </div>
-    <div ng-switch on="data.mode">
-        <div ng-switch-when="Tablets">
-            <ul>
-                <li ng-repeat="tablet in tablets">
-                <b>{{tablet.name}}</b>
-                <p>Цена: {{tablet.price}} $</p>
-                <p>Производитель: {{tablet.company}}</p>
-                </li>
-            </ul>
-        </div>
-        <div ng-switch-when="Phones">
-            <ul>
-                <li ng-repeat="phone in phones">
-                <b>{{phone.name}}</b>
-                <p>Цена: {{phone.price}} $</p>
-                <p>Производитель: {{phone.company}}</p>
-                </li>
-            </ul>
-        </div>
-        <div ng-switch-default>
-            Выберите товары для просмотра
-        </div>
-    </div>
+<div  ng-controller="QuestionController">
+<div class="quest" ng-class="questColorClass"
+ng-mouseenter="changeClass($event)"
+ng-mouseleave="changeClass($event)">
+<h3>{{question.text}}</h3>
+<p>{{question.author}} </p> <p><i>{{question.date}}</i></p>
+</div>
+<h3>Ответы</h3>
+<div class="answers">
+<div ng-repeat="answer in question.answers" class="answer">
+<div class="vote">
+    <a class="vote-up" ng-click="voteUp(answer)"></a>
+    <span class="rate">{{answer.rate}}</span>
+    <a class="vote-down" ng-click="voteDown(answer)"></a>
+</div>
+<b>{{answer.text}}</b>
+<p>{{answer.author}}</p>
+<p><i>{{answer.date}}</i></p>
+</div>
+</div>
 </div>
 <script src="js/lib/angular.min.js"></script>
 <script type="text/javascript">
 var myApp = angular.module('myApp', []);
 </script>
-<script src="js/controllers/phonesController.js"></script>
+<script src="js/controllers/QuestionController.js"></script>
 </body>
 </html>
