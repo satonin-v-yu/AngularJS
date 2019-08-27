@@ -4,27 +4,17 @@
 <meta charset="utf-8">
 </head>
 <body>
-<!-- Наследование контроллеров
-<div ng-controller="parentController">
-    <div ng-controller="firstChildController"></div>
-    <div ng-controller="secondChildController"></div>
-</div>
--->
-<p>2+3={{2+3}}</p>
-<div ng-controller="phoneController">
-<p>2+3={{2+3}}</p>
-<p>Название: {{phone.name}}</p>
-<p>Цена: {{phone.price}} $</p>
-<p>Производитель: {{phone.company.name}}</p>
-</div>
-<div ng-controller="phoneController">
-<p>Производитель: {{phone.company.country}}</p>
+<div ng-controller="myController as myCtrl">
+    <h3>{{myCtrl.message}}</h3>
+    <p>{{myCtrl.text}}</p>
 </div>
 <script src="js/lib/angular.min.js"></script>
 <script type="text/javascript">
-//var myApp=
-angular.module('myApp', []);
+var myApp = angular.module('myApp', []);
+myApp.controller('myController', function() {
+    this.message="myController";
+    this.text="Контроллер без $scope";
+});
 </script>
-<script src="js/controllers/phonesController.js"></script>
 </body>
 </html>
