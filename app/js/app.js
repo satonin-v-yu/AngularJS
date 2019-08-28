@@ -22,7 +22,16 @@ var questApp = angular.module('questApp', ["ngRoute"])
             templateUrl:'views/answer.html',
             controller:'AnswerController'
         });
+        $routeProvider.when("/edit/:id", {
+            templateUrl: "views/answer.html",
+            controller:'AnswerController'
+        });
+        $routeProvider.when("/edit/:id/:data*", {
+            templateUrl: "views/answer.html",
+            controller:'AnswerController'
+        });
         $routeProvider.otherwise({redirectTo: '/question'});
+});
 
 // }).run(function($rootScope, $templateCache) {
 //     $rootScope.$on('$routeChangeStart', function(event, next, current) {
